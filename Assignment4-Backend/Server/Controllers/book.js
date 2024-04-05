@@ -1,3 +1,8 @@
+// File Name: book.js
+// Student Name 1: Menuka Pinto (ID: 200574919)
+// Student Name 2: Lathindu Vidanagama (ID: 200574922)
+// Date: 5th April 2024
+
 "use strict";
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };

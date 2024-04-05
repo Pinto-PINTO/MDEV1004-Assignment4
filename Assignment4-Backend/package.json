@@ -1,8 +1,8 @@
 {
     "name": "mdev1004-m2023-assignment4",
     "version": "0.0.4",
-    "description": "This is a project for MDEV1004 - Assignment 4 - in the Summer 2023 semester at Georgian",
-    "author": "Chesta Patel",
+    "description": "Project for MDEV1004 - Assignment 4 - CRUD",
+    "author": "Menuka Pinto",
     "engines": {
         "node": "20.2.0",
         "npm": "9.6.6"

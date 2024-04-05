@@ -1,7 +1,7 @@
 // File Name: user.ts
-// Student Name: Chesta Patel
-// Student ID: 200542446
-// Date: 17th August 2023
+// Student Name 1: Menuka Pinto (ID: 200574919)
+// Student Name 2: Lathindu Vidanagama (ID: 200574922)
+// Date: 5th April 2024
 
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
