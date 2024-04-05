@@ -110,7 +110,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         Movie movie = movies.get(position);
 
         APIService apiService = new Retrofit.Builder()
-                .baseUrl("https://9bea-2607-fea8-6521-9d00-211a-3935-b416-4225.ngrok-free.app/")
+                .baseUrl("https://beac-2607-fea8-6521-9d00-211a-3935-b416-4225.ngrok-free.app/")
                 .addConverterFactory(MoshiConverterFactory.create())
                 .build().create(APIService.class);
 
