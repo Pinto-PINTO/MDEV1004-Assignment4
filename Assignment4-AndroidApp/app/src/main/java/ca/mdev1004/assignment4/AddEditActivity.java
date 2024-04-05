@@ -33,17 +33,11 @@ public class AddEditActivity extends AppCompatActivity
 
     // Fields
     private EditText bookIDEditText;
-    private EditText titleEditText;
-    private EditText studioEditText;
-    private EditText genresEditText;
-    private EditText directorsEditText;
-    private EditText writersEditText;
-    private EditText actorsEditText;
-    private EditText yearEditText;
-    private EditText lengthEditText;
-    private EditText shortDescriptionEditText;
-    private EditText mpaRatingEditText;
-    private EditText criticsRatingEditText;
+    private EditText bookNameEditText;
+    private EditText isbnEditText;
+    private EditText ratingEditText;
+    private EditText genreEditText;
+    private EditText authorEditText;
     private EditText posterLinkEditText;
     private TextView headerTextView;
     private Book book;
@@ -59,17 +53,11 @@ public class AddEditActivity extends AppCompatActivity
 
         // initialization
         bookIDEditText = findViewById(R.id.bookIDEditText);
-        titleEditText = findViewById(R.id.titleEditText);
-        studioEditText = findViewById(R.id.studioEditText);
-        genresEditText = findViewById(R.id.genresEditText);
-        directorsEditText = findViewById(R.id.directorsEditText);
-        writersEditText = findViewById(R.id.writersEditText);
-        actorsEditText = findViewById(R.id.actorsEditText);
-        yearEditText = findViewById(R.id.yearEditText);
-        lengthEditText = findViewById(R.id.lengthEditText);
-        shortDescriptionEditText = findViewById(R.id.shortDescriptionEditText);
-        mpaRatingEditText = findViewById(R.id.mpaRatingEditText);
-        criticsRatingEditText = findViewById(R.id.criticsRatingEditText);
+        bookNameEditText = findViewById(R.id.bookNameEditText);
+        isbnEditText = findViewById(R.id.isbnEditText);
+        ratingEditText = findViewById(R.id.ratingEditText);
+        genreEditText = findViewById(R.id.genreEditText);
+        authorEditText = findViewById(R.id.authorEditText);
         posterLinkEditText = findViewById(R.id.posterLinkEditText);
         headerTextView = findViewById(R.id.headerTextView);
 
@@ -94,51 +82,36 @@ public class AddEditActivity extends AppCompatActivity
     private void showBookDetails()
     {
         bookIDEditText.setText(book.getBookID());
-        titleEditText.setText(book.getTitle());
-        studioEditText.setText(book.getStudio());
-        genresEditText.setText(String.join(", ", book.getGenres()));
-        directorsEditText.setText(String.join(", ", book.getDirectors()));
-        writersEditText.setText(String.join(", ", book.getWriters()));
-        actorsEditText.setText(String.join(", ", book.getActors()));
-        yearEditText.setText(String.valueOf(book.getYear()));
-        lengthEditText.setText(String.valueOf(book.getLength()));
-        shortDescriptionEditText.setText(book.getShortDescription());
-        mpaRatingEditText.setText(book.getMpaRating());
-        criticsRatingEditText.setText(String.valueOf(book.getCriticsRating()));
+        bookNameEditText.setText(book.getBookName());
+        isbnEditText.setText(book.getIsbn());
+        ratingEditText.setText(String.valueOf(book.getRating()));
+        genreEditText.setText(String.valueOf(book.getGenre()));
+        authorEditText.setText(book.getAuthor());
         posterLinkEditText.setText(book.getPosterLink());
     }
 
     private void saveBook()
     {
         String bookID = bookIDEditText.getText().toString().trim();
-        String title = titleEditText.getText().toString().trim();
-        String studio = studioEditText.getText().toString().trim();
-        String genres = genresEditText.getText().toString().trim();
-        String directors = directorsEditText.getText().toString().trim();
-        String writers = writersEditText.getText().toString().trim();
-        String actors = actorsEditText.getText().toString().trim();
-        int year = Integer.parseInt(yearEditText.getText().toString().trim());
-        int length = Integer.parseInt(lengthEditText.getText().toString().trim());
-        String shortDescription = shortDescriptionEditText.getText().toString().trim();
-        String mpaRating = mpaRatingEditText.getText().toString().trim();
+        String bookName = bookNameEditText.getText().toString().trim();
+        String isbn = isbnEditText.getText().toString().trim();
+        int rating = Integer.parseInt(ratingEditText.getText().toString().trim());
+        String genre = genreEditText.getText().toString().trim();
+        String author = authorEditText.getText().toString().trim();
         String posterLink = posterLinkEditText.getText().toString().trim();
-        double criticsRating = Double.parseDouble(criticsRatingEditText.getText().toString().trim());
         DecimalFormat decimalFormat = new DecimalFormat("#.#");
-        criticsRating = Double.parseDouble(decimalFormat.format(criticsRating));
 
-        if (bookID.isEmpty() || title.isEmpty() || studio.isEmpty() || genres.isEmpty() || directors.isEmpty() ||
-                writers.isEmpty() || actors.isEmpty() || shortDescription.isEmpty() ||
-                mpaRating.isEmpty())
+        if (bookID.isEmpty() || bookName.isEmpty() || isbn.isEmpty() || genre.isEmpty() ||
+                author.isEmpty())
         {
             Toast.makeText(this, "Please fill in all the fields.", Toast.LENGTH_SHORT).show();
             return;
         }
 
         // If book is being edited set current id or create random UUID
-        Book requestBody = new Book(isEditingMode ? book.getId() : UUID.randomUUID().toString(), bookID, title,
-                studio, Arrays.asList(genres.split(", ")), Arrays.asList(directors.split(", ")),
-                Arrays.asList(writers.split(", ")), Arrays.asList(actors.split(", ")), year, length,
-                shortDescription, mpaRating, criticsRating, posterLink);
+        Book requestBody = new Book(isEditingMode ? book.getId() : UUID.randomUUID().toString(), bookID, bookName,
+                isbn, rating, genre,
+                author, posterLink);
 
         APIService apiService = new Retrofit.Builder()
                 .baseUrl("https://5bc5-2607-fea8-6521-9d00-4cbd-bf74-b068-767d.ngrok-free.app/")

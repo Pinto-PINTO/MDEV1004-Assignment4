@@ -11,46 +11,28 @@ public class Book implements Serializable
     private String id;
     @Json(name = "bookID")
     private String bookID;
-    @Json(name = "title")
-    private String title;
-    @Json(name = "studio")
-    private String studio;
-    @Json(name = "genres")
-    private List<String> genres;
-    @Json(name = "directors")
-    private List<String> directors;
-    @Json(name = "writers")
-    private List<String> writers;
-    @Json(name = "actors")
-    private List<String> actors;
-    @Json(name = "year")
-    private int year;
-    @Json(name = "length")
-    private int length;
-    @Json(name = "shortDescription")
-    private String shortDescription;
-    @Json(name = "mpaRating")
-    private String mpaRating;
-    @Json(name = "criticsRating")
-    private double criticsRating;
+    @Json(name = "bookName")
+    private String bookName;
+    @Json(name = "isbn")
+    private String isbn;
+    @Json(name = "rating")
+    private int rating;
+    @Json(name = "genre")
+    private String genre;
+    @Json(name = "author")
+    private String author;
     @Json(name = "posterlink")
     private String posterLink;
 
-    public Book(String id, String bookID, String title, String studio, List<String> genres, List<String> directors, List<String> writers, List<String> actors, int year, int length, String shortDescription, String mpaRating, double criticsRating, String posterLink)
+    public Book(String id, String bookID, String bookName, String isbn, int rating, String genre, String author, String posterLink)
     {
         this.id = id;
         this.bookID = bookID;
-        this.title = title;
-        this.studio = studio;
-        this.genres = genres;
-        this.directors = directors;
-        this.writers = writers;
-        this.actors = actors;
-        this.year = year;
-        this.length = length;
-        this.shortDescription = shortDescription;
-        this.mpaRating = mpaRating;
-        this.criticsRating = criticsRating;
+        this.bookName = bookName;
+        this.isbn = isbn;
+        this.rating = rating;
+        this.genre = genre;
+        this.author = author;
         this.posterLink = posterLink;
     }
 
@@ -64,59 +46,29 @@ public class Book implements Serializable
         return bookID;
     }
 
-    public String getTitle()
+    public String getBookName()
     {
-        return title;
+        return bookName;
     }
 
-    public String getStudio()
+    public String getIsbn()
     {
-        return studio;
+        return isbn;
     }
 
-    public List<String> getGenres()
+    public int getRating()
     {
-        return genres;
+        return rating;
     }
 
-    public List<String> getDirectors()
+    public String getGenre()
     {
-        return directors;
+        return genre;
     }
 
-    public List<String> getWriters()
+    public String getAuthor()
     {
-        return writers;
-    }
-
-    public List<String> getActors()
-    {
-        return actors;
-    }
-
-    public int getYear()
-    {
-        return year;
-    }
-
-    public int getLength()
-    {
-        return length;
-    }
-
-    public String getShortDescription()
-    {
-        return shortDescription;
-    }
-
-    public String getMpaRating()
-    {
-        return mpaRating;
-    }
-
-    public double getCriticsRating()
-    {
-        return criticsRating;
+        return author;
     }
 
     public String getPosterLink()

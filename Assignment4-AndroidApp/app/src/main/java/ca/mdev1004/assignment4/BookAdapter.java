@@ -59,9 +59,9 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
         Book book = books.get(position);
 
-        holder.nameTextView.setText(book.getTitle());
-        holder.studioTextView.setText(book.getStudio());
-        holder.criticsRatingTextView.setText(String.valueOf(book.getCriticsRating()));
+        holder.nameTextView.setText(book.getBookName());
+        holder.studioTextView.setText(book.getAuthor());
+        holder.criticsRatingTextView.setText(String.valueOf(book.getRating()));
 
         if (book.getPosterLink() != null && !book.getPosterLink().isEmpty())
         {
