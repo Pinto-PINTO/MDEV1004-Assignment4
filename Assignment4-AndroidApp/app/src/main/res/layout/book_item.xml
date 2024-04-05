@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:contentDescription="Poster"
         android:scaleType="fitXY"
-        android:src="@drawable/placeholder_poster" />
+        android:src="@drawable/samplebook" />
 
     <!-- Right side layout containing texts -->
     <LinearLayout

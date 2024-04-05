@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            android:text="Favourite Books"
+            android:text="Books in Library"
             android:textSize="24sp"
             android:textStyle="bold" />
 
