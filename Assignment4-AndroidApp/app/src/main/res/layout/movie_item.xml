@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <!-- Movie Poster ImageView -->
+    <ImageView
+        android:id="@+id/posterImageView"
+        android:layout_width="120dp"
+        android:layout_height="match_parent"
+        android:contentDescription="Poster"
+        android:scaleType="fitXY"
+        android:src="@drawable/placeholder_poster" />
+
+    <!-- Right side layout containing texts -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/nameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Movie Name"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- Studio TextView -->
+        <TextView
+            android:id="@+id/studioTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Studio"
+            android:textSize="14sp" />
+
+        <!-- Critics Rating TextView -->
+        <TextView
+            android:id="@+id/criticsRatingTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Critics Rating"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+</LinearLayout>
