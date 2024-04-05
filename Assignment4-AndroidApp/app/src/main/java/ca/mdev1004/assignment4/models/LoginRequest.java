@@ -2,7 +2,7 @@
 // Student Name: Rajat Rajat
 // Student ID: 200519561
 // Date: 17th August 2023
-package ca.georgiancollege.mdev1004_m2023_assignment4_android.models;
+package ca.mdev1004.assignment4.models;
 
 import com.squareup.moshi.Json;
 

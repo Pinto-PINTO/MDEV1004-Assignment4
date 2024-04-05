@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'ca.georgiancollege.mdev1004_m2023_assignment4_android'
+    namespace 'ca.mdev1004.assignment4'
     compileSdk 33
 
     defaultConfig {
-        applicationId "ca.georgiancollege.mdev1004_m2023_assignment4_android"
+        applicationId "ca.mdev1004.assignment4"
         minSdk 24
         targetSdk 33
         versionCode 1

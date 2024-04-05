@@ -2,7 +2,7 @@
 // Student Name: Rajat Rajat
 // Student ID: 200519561
 // Date: 17th August 2023
-package ca.georgiancollege.mdev1004_m2023_assignment4_android;
+package ca.mdev1004.assignment4;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -16,6 +16,9 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
+
+import ca.mdev1004.assignment4.R;
+
 
 public class SwipeToDeleteCallback extends ItemTouchHelper.Callback
 {

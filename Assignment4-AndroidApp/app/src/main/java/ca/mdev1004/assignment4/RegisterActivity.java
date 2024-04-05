@@ -2,7 +2,7 @@
 // Student Name: Rajat Rajat
 // Student ID: 200519561
 // Date: 17th August 2023
-package ca.georgiancollege.mdev1004_m2023_assignment4_android;
+package ca.mdev1004.assignment4;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,8 +13,9 @@ import android.widget.Toast;
 
 import java.io.IOException;
 
-import ca.georgiancollege.mdev1004_m2023_assignment4_android.models.BasicResponse;
-import ca.georgiancollege.mdev1004_m2023_assignment4_android.models.RegisterRequest;
+import ca.mdev1004.assignment4.R;
+import ca.mdev1004.assignment4.models.BasicResponse;
+import ca.mdev1004.assignment4.models.RegisterRequest;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

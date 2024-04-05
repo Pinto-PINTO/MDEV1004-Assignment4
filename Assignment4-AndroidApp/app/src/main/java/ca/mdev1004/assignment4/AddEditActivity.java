@@ -2,7 +2,7 @@
 // Student Name: Rajat Rajat
 // Student ID: 200519561
 // Date: 17th August 2023
-package ca.georgiancollege.mdev1004_m2023_assignment4_android;
+package ca.mdev1004.assignment4;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,7 +18,8 @@ import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.UUID;
 
-import ca.georgiancollege.mdev1004_m2023_assignment4_android.models.Book;
+import ca.mdev1004.assignment4.R;
+import ca.mdev1004.assignment4.models.Book;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

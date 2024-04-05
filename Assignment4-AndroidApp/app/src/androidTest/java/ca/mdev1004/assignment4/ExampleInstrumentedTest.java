@@ -1,4 +1,4 @@
-package ca.georgiancollege.mdev1004_m2023_assignment4_android;
+package ca.mdev1004.assignment4;
 
 import android.content.Context;
 
@@ -23,6 +23,6 @@ public class ExampleInstrumentedTest
     {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("ca.georgiancollege.mdev1004_m2023_assignment4_android", appContext.getPackageName());
+        assertEquals("ca.georgiancollege.assignment4", appContext.getPackageName());
     }
 }

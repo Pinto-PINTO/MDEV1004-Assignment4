@@ -1,4 +1,4 @@
-package ca.georgiancollege.mdev1004_m2023_assignment4_android;
+package ca.mdev1004.assignment4;
 
 import org.junit.Test;
 
