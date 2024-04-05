@@ -19,11 +19,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class SwipeToDeleteCallback extends ItemTouchHelper.Callback
 {
-    private final MovieAdapter adapter;
+    private final BookAdapter adapter;
     private final Drawable deleteIcon;
     private final ColorDrawable background;
 
-    public SwipeToDeleteCallback(Context context, MovieAdapter adapter)
+    public SwipeToDeleteCallback(Context context, BookAdapter adapter)
     {
         this.adapter = adapter;
         this.deleteIcon = ContextCompat.getDrawable(context, R.drawable.ic_delete);

@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-    <!-- Movie Poster ImageView -->
+    <!-- Book Poster ImageView -->
     <ImageView
         android:id="@+id/posterImageView"
         android:layout_width="120dp"
@@ -26,7 +26,7 @@
             android:id="@+id/nameTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Movie Name"
+            android:text="Book Name"
             android:textSize="18sp"
             android:textStyle="bold" />
 

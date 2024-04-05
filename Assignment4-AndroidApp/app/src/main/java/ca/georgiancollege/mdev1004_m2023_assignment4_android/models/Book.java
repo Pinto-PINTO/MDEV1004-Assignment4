@@ -5,12 +5,12 @@ import com.squareup.moshi.Json;
 import java.io.Serializable;
 import java.util.List;
 
-public class Movie implements Serializable
+public class Book implements Serializable
 {
     @Json(name = "_id")
     private String id;
-    @Json(name = "movieID")
-    private String movieID;
+    @Json(name = "bookID")
+    private String bookID;
     @Json(name = "title")
     private String title;
     @Json(name = "studio")
@@ -36,10 +36,10 @@ public class Movie implements Serializable
     @Json(name = "posterlink")
     private String posterLink;
 
-    public Movie(String id, String movieID, String title, String studio, List<String> genres, List<String> directors, List<String> writers, List<String> actors, int year, int length, String shortDescription, String mpaRating, double criticsRating, String posterLink)
+    public Book(String id, String bookID, String title, String studio, List<String> genres, List<String> directors, List<String> writers, List<String> actors, int year, int length, String shortDescription, String mpaRating, double criticsRating, String posterLink)
     {
         this.id = id;
-        this.movieID = movieID;
+        this.bookID = bookID;
         this.title = title;
         this.studio = studio;
         this.genres = genres;
@@ -59,9 +59,9 @@ public class Movie implements Serializable
         return id;
     }
 
-    public String getMovieID()
+    public String getBookID()
     {
-        return movieID;
+        return bookID;
     }
 
     public String getTitle()

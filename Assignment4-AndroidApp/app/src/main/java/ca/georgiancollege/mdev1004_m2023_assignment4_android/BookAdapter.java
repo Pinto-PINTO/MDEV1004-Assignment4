@@ -1,4 +1,4 @@
-// File Name: MovieAdapter.java
+// File Name: BookAdapter.java
 // Student Name: Rajat Rajat
 // Student ID: 200519561
 // Date: 17th August 2023
@@ -22,51 +22,51 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-import ca.georgiancollege.mdev1004_m2023_assignment4_android.models.Movie;
+import ca.georgiancollege.mdev1004_m2023_assignment4_android.models.Book;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.moshi.MoshiConverterFactory;
 
-public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder>
+public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder>
 {
-    private List<Movie> movies;
+    private List<Book> books;
     private final Context context;
 
-    public MovieAdapter(List<Movie> movies, Context context)
+    public BookAdapter(List<Book> books, Context context)
     {
-        this.movies = movies;
+        this.books = books;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+    public BookViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_item, parent, false);
-        return new MovieViewHolder(view);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.book_item, parent, false);
+        return new BookViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MovieViewHolder holder, int position)
+    public void onBindViewHolder(@NonNull BookViewHolder holder, int position)
     {
-        if (movies == null)
+        if (books == null)
         {
             return;
         }
 
-        Movie movie = movies.get(position);
+        Book book = books.get(position);
 
-        holder.nameTextView.setText(movie.getTitle());
-        holder.studioTextView.setText(movie.getStudio());
-        holder.criticsRatingTextView.setText(String.valueOf(movie.getCriticsRating()));
+        holder.nameTextView.setText(book.getTitle());
+        holder.studioTextView.setText(book.getStudio());
+        holder.criticsRatingTextView.setText(String.valueOf(book.getCriticsRating()));
 
-        if (movie.getPosterLink() != null && !movie.getPosterLink().isEmpty())
+        if (book.getPosterLink() != null && !book.getPosterLink().isEmpty())
         {
             Glide
                     .with(context)
-                    .load(movie.getPosterLink())
+                    .load(book.getPosterLink())
                     .fallback(R.drawable.placeholder_poster)
                     .placeholder(R.drawable.placeholder_poster)
                     .fitCenter()
@@ -76,7 +76,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         holder.itemView.setOnClickListener(v ->
         {
             Intent intent = new Intent(context, AddEditActivity.class);
-            intent.putExtra(AddEditActivity.EXTRA_MOVIE_ID, movie);
+            intent.putExtra(AddEditActivity.EXTRA_BOOK_ID, book);
             context.startActivity(intent);
         });
     }
@@ -85,12 +85,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     @Override
     public int getItemCount()
     {
-        return movies.size();
+        return books.size();
     }
 
-    public void setMovies(List<Movie> movies)
+    public void setBooks(List<Book> books)
     {
-        this.movies = movies;
+        this.books = books;
         this.notifyDataSetChanged();
     }
 
@@ -101,13 +101,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     public void deleteItem(int position)
     {
-        deleteMovie(position);
+        deleteBook(position);
     }
 
 
-    private void deleteMovie(int position)
+    private void deleteBook(int position)
     {
-        Movie movie = movies.get(position);
+        Book book = books.get(position);
 
         APIService apiService = new Retrofit.Builder()
                 .baseUrl("https://beac-2607-fea8-6521-9d00-211a-3935-b416-4225.ngrok-free.app/")
@@ -119,7 +119,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
         // Add the AuthToken to the request headers
         String authorizationHeader = "Bearer " + authToken;
-        Call<Void> call = apiService.deleteMovie(authorizationHeader, movie.getId());
+        Call<Void> call = apiService.deleteBook(authorizationHeader, book.getId());
 
         call.enqueue(new Callback<Void>()
         {
@@ -128,12 +128,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             {
                 if (response.isSuccessful())
                 {
-                    movies.remove(position);
+                    books.remove(position);
                     notifyItemRemoved(position);
                 } else
                 {
                     // Handle the error here (e.g., show a Toast)
-                    Toast.makeText(context, "Failed to delete movie.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Failed to delete book.", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -141,20 +141,20 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             public void onFailure(Call<Void> call, Throwable t)
             {
                 // Handle the error here (e.g., show a Toast)
-                Toast.makeText(context, "Failed to delete movie. Error: " + t.getMessage(),
+                Toast.makeText(context, "Failed to delete book. Error: " + t.getMessage(),
                         Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    static class MovieViewHolder extends RecyclerView.ViewHolder
+    static class BookViewHolder extends RecyclerView.ViewHolder
     {
         TextView nameTextView;
         TextView studioTextView;
         TextView criticsRatingTextView;
         ImageView posterImageView;
 
-        public MovieViewHolder(@NonNull View itemView)
+        public BookViewHolder(@NonNull View itemView)
         {
             super(itemView);
             nameTextView = itemView.findViewById(R.id.nameTextView);

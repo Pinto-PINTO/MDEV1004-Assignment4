@@ -10,7 +10,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,7 +18,7 @@ import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.UUID;
 
-import ca.georgiancollege.mdev1004_m2023_assignment4_android.models.Movie;
+import ca.georgiancollege.mdev1004_m2023_assignment4_android.models.Book;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,10 +28,10 @@ import retrofit2.converter.moshi.MoshiConverterFactory;
 public class AddEditActivity extends AppCompatActivity
 {
 
-    public static String EXTRA_MOVIE_ID = "movie";
+    public static String EXTRA_BOOK_ID = "book";
 
     // Fields
-    private EditText movieIDEditText;
+    private EditText bookIDEditText;
     private EditText titleEditText;
     private EditText studioEditText;
     private EditText genresEditText;
@@ -46,9 +45,9 @@ public class AddEditActivity extends AppCompatActivity
     private EditText criticsRatingEditText;
     private EditText posterLinkEditText;
     private TextView headerTextView;
-    private Movie movie;
+    private Book book;
 
-    // To keep track if the movie is being edited
+    // To keep track if the book is being edited
     private boolean isEditingMode;
 
     @Override
@@ -58,7 +57,7 @@ public class AddEditActivity extends AppCompatActivity
         setContentView(R.layout.activity_add_edit);
 
         // initialization
-        movieIDEditText = findViewById(R.id.movieIDEditText);
+        bookIDEditText = findViewById(R.id.bookIDEditText);
         titleEditText = findViewById(R.id.titleEditText);
         studioEditText = findViewById(R.id.studioEditText);
         genresEditText = findViewById(R.id.genresEditText);
@@ -74,43 +73,43 @@ public class AddEditActivity extends AppCompatActivity
         headerTextView = findViewById(R.id.headerTextView);
 
         // Check if in editing mode
-        if (getIntent().hasExtra(EXTRA_MOVIE_ID))
+        if (getIntent().hasExtra(EXTRA_BOOK_ID))
         {
             isEditingMode = true;
-            this.movie = (Movie) getIntent().getSerializableExtra(EXTRA_MOVIE_ID);
-            showMovieDetails();
-            headerTextView.setText("Edit Movie");
+            this.book = (Book) getIntent().getSerializableExtra(EXTRA_BOOK_ID);
+            showBookDetails();
+            headerTextView.setText("Edit Book");
         } else
         {
-            headerTextView.setText("Add Movie");
+            headerTextView.setText("Add Book");
         }
 
         // Set click listeners for buttons
-        findViewById(R.id.saveButton).setOnClickListener(v -> saveMovie());
+        findViewById(R.id.saveButton).setOnClickListener(v -> saveBook());
 
         findViewById(R.id.cancelButton).setOnClickListener(v -> finish());
     }
 
-    private void showMovieDetails()
+    private void showBookDetails()
     {
-        movieIDEditText.setText(movie.getMovieID());
-        titleEditText.setText(movie.getTitle());
-        studioEditText.setText(movie.getStudio());
-        genresEditText.setText(String.join(", ", movie.getGenres()));
-        directorsEditText.setText(String.join(", ", movie.getDirectors()));
-        writersEditText.setText(String.join(", ", movie.getWriters()));
-        actorsEditText.setText(String.join(", ", movie.getActors()));
-        yearEditText.setText(String.valueOf(movie.getYear()));
-        lengthEditText.setText(String.valueOf(movie.getLength()));
-        shortDescriptionEditText.setText(movie.getShortDescription());
-        mpaRatingEditText.setText(movie.getMpaRating());
-        criticsRatingEditText.setText(String.valueOf(movie.getCriticsRating()));
-        posterLinkEditText.setText(movie.getPosterLink());
+        bookIDEditText.setText(book.getBookID());
+        titleEditText.setText(book.getTitle());
+        studioEditText.setText(book.getStudio());
+        genresEditText.setText(String.join(", ", book.getGenres()));
+        directorsEditText.setText(String.join(", ", book.getDirectors()));
+        writersEditText.setText(String.join(", ", book.getWriters()));
+        actorsEditText.setText(String.join(", ", book.getActors()));
+        yearEditText.setText(String.valueOf(book.getYear()));
+        lengthEditText.setText(String.valueOf(book.getLength()));
+        shortDescriptionEditText.setText(book.getShortDescription());
+        mpaRatingEditText.setText(book.getMpaRating());
+        criticsRatingEditText.setText(String.valueOf(book.getCriticsRating()));
+        posterLinkEditText.setText(book.getPosterLink());
     }
 
-    private void saveMovie()
+    private void saveBook()
     {
-        String movieID = movieIDEditText.getText().toString().trim();
+        String bookID = bookIDEditText.getText().toString().trim();
         String title = titleEditText.getText().toString().trim();
         String studio = studioEditText.getText().toString().trim();
         String genres = genresEditText.getText().toString().trim();
@@ -126,7 +125,7 @@ public class AddEditActivity extends AppCompatActivity
         DecimalFormat decimalFormat = new DecimalFormat("#.#");
         criticsRating = Double.parseDouble(decimalFormat.format(criticsRating));
 
-        if (movieID.isEmpty() || title.isEmpty() || studio.isEmpty() || genres.isEmpty() || directors.isEmpty() ||
+        if (bookID.isEmpty() || title.isEmpty() || studio.isEmpty() || genres.isEmpty() || directors.isEmpty() ||
                 writers.isEmpty() || actors.isEmpty() || shortDescription.isEmpty() ||
                 mpaRating.isEmpty())
         {
@@ -134,8 +133,8 @@ public class AddEditActivity extends AppCompatActivity
             return;
         }
 
-        // If movie is being edited set current id or create random UUID
-        Movie requestBody = new Movie(isEditingMode ? movie.getId() : UUID.randomUUID().toString(), movieID, title,
+        // If book is being edited set current id or create random UUID
+        Book requestBody = new Book(isEditingMode ? book.getId() : UUID.randomUUID().toString(), bookID, title,
                 studio, Arrays.asList(genres.split(", ")), Arrays.asList(directors.split(", ")),
                 Arrays.asList(writers.split(", ")), Arrays.asList(actors.split(", ")), year, length,
                 shortDescription, mpaRating, criticsRating, posterLink);
@@ -154,10 +153,10 @@ public class AddEditActivity extends AppCompatActivity
 
         if (isEditingMode)
         {
-            call = apiService.updateMovie(authorizationHeader, movie.getId(), requestBody);
+            call = apiService.updateBook(authorizationHeader, book.getId(), requestBody);
         } else
         {
-            call = apiService.addMovie(authorizationHeader, requestBody);
+            call = apiService.addBook(authorizationHeader, requestBody);
         }
 
         call.enqueue(new Callback<Void>()
@@ -168,12 +167,12 @@ public class AddEditActivity extends AppCompatActivity
                 Log.d("ADD ", response.toString());
                 if (response.isSuccessful())
                 {
-                    // Movie updated or created successfully
+                    // Book updated or created successfully
                     finish();
                 } else
                 {
                     // Handle the error here (e.g., show a Toast)
-                    Toast.makeText(AddEditActivity.this, "Failed to update movie.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddEditActivity.this, "Failed to update book.", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -181,7 +180,7 @@ public class AddEditActivity extends AppCompatActivity
             public void onFailure(Call<Void> call, Throwable t)
             {
                 // Handle the error here (e.g., show a Toast)
-                Toast.makeText(AddEditActivity.this, "Failed to update movie. Error: " + t.getMessage(),
+                Toast.makeText(AddEditActivity.this, "Failed to update book. Error: " + t.getMessage(),
                         Toast.LENGTH_SHORT).show();
             }
         });

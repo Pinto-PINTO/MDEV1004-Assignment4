@@ -7,8 +7,8 @@ package ca.georgiancollege.mdev1004_m2023_assignment4_android;
 import ca.georgiancollege.mdev1004_m2023_assignment4_android.models.BasicResponse;
 import ca.georgiancollege.mdev1004_m2023_assignment4_android.models.LoginRequest;
 import ca.georgiancollege.mdev1004_m2023_assignment4_android.models.LoginResponse;
-import ca.georgiancollege.mdev1004_m2023_assignment4_android.models.Movie;
-import ca.georgiancollege.mdev1004_m2023_assignment4_android.models.MovieListResponse;
+import ca.georgiancollege.mdev1004_m2023_assignment4_android.models.Book;
+import ca.georgiancollege.mdev1004_m2023_assignment4_android.models.BookListResponse;
 import ca.georgiancollege.mdev1004_m2023_assignment4_android.models.RegisterRequest;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -24,17 +24,17 @@ public interface APIService
 
 
     @GET("/api/list")
-    Call<MovieListResponse> getMovies(@Header("Authorization") String authToken);
+    Call<BookListResponse> getBooks(@Header("Authorization") String authToken);
 
     @POST("/api/add")
-    Call<Void> addMovie(@Header("Authorization") String authToken, @Body Movie movie);
+    Call<Void> addBook(@Header("Authorization") String authToken, @Body Book book);
 
-    @PUT("/api/update/{movieId}")
-    Call<Void> updateMovie(@Header("Authorization") String authToken, @Path("movieId") String movieId, @Body Movie movie);
+    @PUT("/api/update/{bookId}")
+    Call<Void> updateBook(@Header("Authorization") String authToken, @Path("bookId") String bookId, @Body Book book);
 
 
-    @DELETE("/api/delete/{movieID}")
-    Call<Void> deleteMovie(@Header("Authorization") String authToken, @Path("movieID") String movieID);
+    @DELETE("/api/delete/{bookID}")
+    Call<Void> deleteBook(@Header("Authorization") String authToken, @Path("bookID") String bookID);
 
     @POST("/api/login")
     Call<LoginResponse> loginUser(@Body LoginRequest loginRequest);

@@ -18,8 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import ca.georgiancollege.mdev1004_m2023_assignment4_android.models.Movie;
-import ca.georgiancollege.mdev1004_m2023_assignment4_android.models.MovieListResponse;
+import ca.georgiancollege.mdev1004_m2023_assignment4_android.models.Book;
+import ca.georgiancollege.mdev1004_m2023_assignment4_android.models.BookListResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -30,8 +30,8 @@ public class MainActivity extends AppCompatActivity
 {
 
     private RecyclerView recyclerView;
-    private MovieAdapter movieAdapter;
-    private List<Movie> movies;
+    private BookAdapter bookAdapter;
+    private List<Book> books;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        movies = new ArrayList<>();
+        books = new ArrayList<>();
 
         setupRecyclerView();
 
@@ -56,11 +56,11 @@ public class MainActivity extends AppCompatActivity
     {
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        movieAdapter = new MovieAdapter(movies, this);
-        SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback(this, movieAdapter);
+        bookAdapter = new BookAdapter(books, this);
+        SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback(this, bookAdapter);
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeToDeleteCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
-        recyclerView.setAdapter(movieAdapter);
+        recyclerView.setAdapter(bookAdapter);
     }
 
     private void logout()
@@ -88,10 +88,10 @@ public class MainActivity extends AppCompatActivity
     protected void onStart()
     {
         super.onStart();
-        fetchMovies();
+        fetchBooks();
     }
 
-    private void fetchMovies()
+    private void fetchBooks()
     {
 
         APIService apiService = new Retrofit.Builder()
@@ -104,41 +104,41 @@ public class MainActivity extends AppCompatActivity
 
         // Add the AuthToken to the request headers
         String authorizationHeader = "Bearer " + authToken;
-        Call<MovieListResponse> call = apiService.getMovies(authorizationHeader);
-        call.enqueue(new Callback<MovieListResponse>()
+        Call<BookListResponse> call = apiService.getBooks(authorizationHeader);
+        call.enqueue(new Callback<BookListResponse>()
         {
             @Override
-            public void onResponse(Call<MovieListResponse> call, Response<MovieListResponse> response)
+            public void onResponse(Call<BookListResponse> call, Response<BookListResponse> response)
             {
-                handleMovieListResponse(response);
+                handleBookListResponse(response);
             }
 
             @Override
-            public void onFailure(Call<MovieListResponse> call, Throwable t)
+            public void onFailure(Call<BookListResponse> call, Throwable t)
             {
                 Toast.makeText(MainActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void handleMovieListResponse(Response<MovieListResponse> response)
+    private void handleBookListResponse(Response<BookListResponse> response)
     {
         if (response.isSuccessful() && response.body() != null)
         {
-            MovieListResponse movieListResponse = response.body();
-            if (movieListResponse.isSuccess())
+            BookListResponse bookListResponse = response.body();
+            if (bookListResponse.isSuccess())
             {
-                List<Movie> movies = movieListResponse.getMovies();
-                if (movies != null && !movies.isEmpty())
+                List<Book> books = bookListResponse.getBooks();
+                if (books != null && !books.isEmpty())
                 {
-                    movieAdapter.setMovies(movies);
+                    bookAdapter.setBooks(books);
                 } else
                 {
-                    Toast.makeText(MainActivity.this, "No movies available.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "No books available.", Toast.LENGTH_SHORT).show();
                 }
             } else
             {
-                Toast.makeText(MainActivity.this, "Error: " + movieListResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Error: " + bookListResponse.getMessage(), Toast.LENGTH_SHORT).show();
             }
         } else
         {
