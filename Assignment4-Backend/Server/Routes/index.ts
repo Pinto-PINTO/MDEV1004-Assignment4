@@ -7,33 +7,33 @@ import express from "express";
 let router = express.Router();
 import passport from "passport";
 
-/* Get the movie controller functions */
-import { DisplayMovieList, DisplayMovieByID, AddMovie, UpdateMovie, DeleteMovie } from "../Controllers/movie";
+/* Get the book controller functions */
+import { DisplayBookList, DisplayBookByID, AddBook, UpdateBook, DeleteBook } from "../Controllers/book";
 
 /* Get the auth controller functions */
 import { ProcessLogin, ProcessLogout, ProcessRegisterPage } from "../Controllers/user";
 
-/* GET /api/list - display the movie list */
+/* GET /api/list - display the book list */
 router.get("/list", passport.authenticate("jwt", { session: false }), (req, res, next) =>
-    DisplayMovieList(req, res, next)
+    DisplayBookList(req, res, next)
 );
 
-/* GET /api/find/:id - display a movie by id */
+/* GET /api/find/:id - display a book by id */
 router.get("/find/:id", passport.authenticate("jwt", { session: false }), (req, res, next) =>
-    DisplayMovieByID(req, res, next)
+    DisplayBookByID(req, res, next)
 );
 
-/* POST /api/add - add a new movie */
-router.post("/add", passport.authenticate("jwt", { session: false }), (req, res, next) => AddMovie(req, res, next));
+/* POST /api/add - add a new book */
+router.post("/add", passport.authenticate("jwt", { session: false }), (req, res, next) => AddBook(req, res, next));
 
-/* PUT /api/update/:id - update a movie by id */
+/* PUT /api/update/:id - update a book by id */
 router.put("/update/:id", passport.authenticate("jwt", { session: false }), (req, res, next) =>
-    UpdateMovie(req, res, next)
+    UpdateBook(req, res, next)
 );
 
-/* GET /api/delete/:id - delete a movie by id */
+/* GET /api/delete/:id - delete a book by id */
 router.delete("/delete/:id", passport.authenticate("jwt", { session: false }), (req, res, next) =>
-    DeleteMovie(req, res, next)
+    DeleteBook(req, res, next)
 );
 
 /* POST /api/register - add a new user */

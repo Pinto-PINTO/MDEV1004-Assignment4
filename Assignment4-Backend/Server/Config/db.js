@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-let localURI = "mongodb://127.0.0.1:27017/movies";
-let remoteURI = "mongodb+srv://menuka:menuka@booksassignment4.yfn6mog.mongodb.net/movies";
+let localURI = "mongodb://127.0.0.1:27017/books";
+let remoteURI = "mongodb+srv://menuka:menuka@booksassignment4.yfn6mog.mongodb.net/books";
 let secret = "secret";
 exports.default = {
     localURI: localURI,

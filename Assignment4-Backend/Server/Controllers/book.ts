@@ -1,11 +1,11 @@
-// File Name: movie.ts
+// File Name: book.ts
 // Student Name: Chesta Patel
 // Student ID: 200542446
 // Date: 17th August 2023
 
 import { Request, Response, NextFunction } from "express";
 
-import Movie from "../Models/movie";
+import Book from "../Models/book";
 
 /**
  * This function sanitizes the array of strings
@@ -25,18 +25,18 @@ function SanitizeArray(unsanitizedValue: string | string[]): string[] {
 /* API Functions */
 
 /**
- * This function displays the Movie List
+ * This function displays the Book List
  *
  * @export
  * @param {Request} req
  * @param {Response} res
  * @param {NextFunction} next
  */
-export function DisplayMovieList(req: Request, res: Response, next: NextFunction): void {
-    // Find all Movies in the Movie collection
-    Movie.find({})
+export function DisplayBookList(req: Request, res: Response, next: NextFunction): void {
+    // Find all Books in the Book collection
+    Book.find({})
         .then(function (data) {
-            res.status(200).json({ success: true, msg: "Movie List Retrieved and Displayed", data: data });
+            res.status(200).json({ success: true, msg: "Book List Retrieved and Displayed", data: data });
         })
         .catch(function (err) {
             console.error(err);
@@ -44,20 +44,20 @@ export function DisplayMovieList(req: Request, res: Response, next: NextFunction
 }
 
 /**
- * This function displays a single movie by the provided ID
+ * This function displays a single book by the provided ID
  *
  * @export
  * @param {Request} req
  * @param {Response} res
  * @param {NextFunction} next
  */
-export function DisplayMovieByID(req: Request, res: Response, next: NextFunction): void {
+export function DisplayBookByID(req: Request, res: Response, next: NextFunction): void {
     try {
         // Get the id from the url
         let id = req.params.id;
 
-        // Find the Movie by id
-        Movie.findById({ _id: id })
+        // Find the Book by id
+        Book.findById({ _id: id })
             .then(function (data) {
                 res.status(200).json({ success: true, msg: "Move Retrieved by ID", data: data });
             })
@@ -70,14 +70,14 @@ export function DisplayMovieByID(req: Request, res: Response, next: NextFunction
 }
 
 /**
- * This function adds a new movie to the database
+ * This function adds a new book to the database
  *
  * @export
  * @param {Request} req
  * @param {Response} res
  * @param {NextFunction} next
  */
-export function AddMovie(req: Request, res: Response, next: NextFunction): void {
+export function AddBook(req: Request, res: Response, next: NextFunction): void {
     try {
         // Sanitize the array
         let genres = SanitizeArray(req.body.genres as string);
@@ -85,26 +85,20 @@ export function AddMovie(req: Request, res: Response, next: NextFunction): void 
         let writers = SanitizeArray(req.body.writers as string);
         let actors = SanitizeArray(req.body.actors as string);
 
-        // Instantiate a new Movie
-        let movie = new Movie({
-            movieID: req.body.movieID,
-            title: req.body.title,
-            studio: req.body.studio,
-            genres: genres,
-            directors: directors,
-            writers: writers,
-            actors: actors,
-            length: req.body.length,
-            year: req.body.year,
-            shortDescription: req.body.shortDescription,
-            mpaRating: req.body.mpaRating,
-            criticsRating: req.body.criticsRating,
+        // Instantiate a new Book
+        let book = new Book({
+            bookID: req.body.bookID,
+            bookName: req.body.bookName,
+            isbn: req.body.isbn,
+            rating: req.body.rating,
+            author: req.body.author,
+            genre: req.body.genre,
         });
 
-        // Create a new movie and pass it to the db
-        Movie.create(movie)
+        // Create a new book and pass it to the db
+        Book.create(book)
             .then(function () {
-                res.status(200).json({ success: true, msg: "Movie Added Successfully", data: movie });
+                res.status(200).json({ success: true, msg: "Book Added Successfully", data: book });
             })
             .catch(function (err) {
                 console.error(err);
@@ -115,45 +109,34 @@ export function AddMovie(req: Request, res: Response, next: NextFunction): void 
 }
 
 /**
- * This function removes a movie from the database by the provided ID
+ * This function removes a book from the database by the provided ID
  *
  * @export
  * @param {Request} req
  * @param {Response} res
  * @param {NextFunction} next
  */
-export function UpdateMovie(req: Request, res: Response, next: NextFunction): void {
+export function UpdateBook(req: Request, res: Response, next: NextFunction): void {
     try {
         // Get the id from the url
         let id = req.params.id;
 
-        // Sanitize the array
-        let genres = SanitizeArray(req.body.genres as string);
-        let directors = SanitizeArray(req.body.directors as string);
-        let writers = SanitizeArray(req.body.writers as string);
-        let actors = SanitizeArray(req.body.actors as string);
 
-        // Instantiate a new Movie Object
-        let movieToUpdate = new Movie({
+        // Instantiate a new Book Object
+        let bookToUpdate = new Book({
             _id: id,
-            movieID: req.body.movieID,
-            title: req.body.title,
-            studio: req.body.studio,
-            genres: genres,
-            directors: directors,
-            writers: writers,
-            actors: actors,
-            length: req.body.length,
-            year: req.body.year,
-            shortDescription: req.body.shortDescription,
-            mpaRating: req.body.mpaRating,
-            criticsRating: req.body.criticsRating,
+            bookID: req.body.bookID,
+            bookName: req.body.bookName,
+            isbn: req.body.isbn,
+            rating: req.body.rating,
+            author: req.body.author,
+            genre: req.body.genre,
         });
 
-        // Find the Movie by id and then update
-        Movie.updateOne({ _id: id }, movieToUpdate)
+        // Find the Book by id and then update
+        Book.updateOne({ _id: id }, bookToUpdate)
             .then(function () {
-                res.status(200).json({ success: true, msg: "Movie Updated Successfully", data: movieToUpdate });
+                res.status(200).json({ success: true, msg: "Book Updated Successfully", data: bookToUpdate });
             })
             .catch(function (err) {
                 console.error(err);
@@ -164,20 +147,20 @@ export function UpdateMovie(req: Request, res: Response, next: NextFunction): vo
 }
 
 /**
- * This function removes a movie from the database by the provided ID
+ * This function removes a book from the database by the provided ID
  *
  * @export
  * @param {Request} req
  * @param {Response} res
  * @param {NextFunction} next
  */
-export function DeleteMovie(req: Request, res: Response, next: NextFunction): void {
+export function DeleteBook(req: Request, res: Response, next: NextFunction): void {
     try {
         // Get the id from the url
         let id = req.params.id;
 
-        // Find the Movie by id and then delete
-        Movie.deleteOne({ _id: id })
+        // Find the Book by id and then delete
+        Book.deleteOne({ _id: id })
             .then(function () {
                 res.json(id);
             })

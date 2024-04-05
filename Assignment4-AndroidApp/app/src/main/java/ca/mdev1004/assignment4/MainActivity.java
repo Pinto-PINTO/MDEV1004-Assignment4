@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity
     {
 
         APIService apiService = new Retrofit.Builder()
-                .baseUrl("https://beac-2607-fea8-6521-9d00-211a-3935-b416-4225.ngrok-free.app/")
+                .baseUrl("https://5bc5-2607-fea8-6521-9d00-4cbd-bf74-b068-767d.ngrok-free.app/")
                 .addConverterFactory(MoshiConverterFactory.create())
                 .build().create(APIService.class);
 
