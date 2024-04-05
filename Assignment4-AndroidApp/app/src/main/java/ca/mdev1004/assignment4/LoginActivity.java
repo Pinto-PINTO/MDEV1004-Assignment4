@@ -1,7 +1,7 @@
 // File Name: LoginActivity.java
-// Student Name: Rajat Rajat
-// Student ID: 200519561
-// Date: 17th August 2023
+// Student Name 1: Menuka Pinto (ID: 200574919)
+// Student Name 2: Lathindu Vidanagama (ID: 200574922)
+// Date: 5th April 2024
 package ca.mdev1004.assignment4;
 
 import androidx.appcompat.app.AppCompatActivity;
